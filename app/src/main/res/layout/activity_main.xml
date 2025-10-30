@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="Enter a number (e.g., 7)" />
+        android:hint="Enter a number" />
 
     <Button
         android:id="@+id/btnGenerate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Generate Table"
+        android:text="Creat table"
         android:layout_marginTop="12dp" />
 
     <ListView
