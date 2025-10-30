@@ -16,42 +16,6 @@ public class DataRepository {
     private static final ArrayList<String> currentTable = new ArrayList<>();
 
 
-    public static void setTableFor(int number) {
-        currentNumber = number;
-        currentTable.clear();
-
-        for (int i = 1; i <= 10; i++) {
-            currentTable.add(number + " × " + i + " = " + (number * i));
-        }
-
-        // Record this number in the history
-        historyNumbers.add(number);
-    }
-
-    /**
-     * Returns the current multiplication table being displayed.
-     */
-    public static ArrayList<String> getCurrentTable() {
-        return currentTable;
-    }
-
-    public static Integer getCurrentNumber() {
-        return currentNumber;
-    }
-
-
-    public static String deleteRowAt(int index) {
-        if (index >= 0 && index < currentTable.size()) {
-            return currentTable.remove(index);
-        }
-        return null;
-    }
-
-
-    public static void clearCurrentTable() {
-        currentTable.clear();
-    }
-
     /**
      * Returns a list of all numbers for which tables were generated.
      */
