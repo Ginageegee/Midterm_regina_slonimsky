@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText etNumber;
     private Button btnGenerate;
+    private Button btnHistory; // 👈 add this
     private ListView lvResults;
 
     private final ArrayList<String> tableItems = new ArrayList<>();
@@ -41,15 +42,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Initialize views
-        etNumber = findViewById(R.id.etNumber);
-        btnGenerate = findViewById(R.id.btnGenerate);
-        lvResults = findViewById(R.id.lvResults);
+        etNumber   = findViewById(R.id.etNumber);
+        btnGenerate= findViewById(R.id.btnGenerate);
+        lvResults  = findViewById(R.id.lvResults);
+        btnHistory = findViewById(R.id.btnHistory); // 👈 find it
 
         // Set up ListView
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, tableItems);
         lvResults.setAdapter(adapter);
 
-        // Generate  table
+        // Generate table
         btnGenerate.setOnClickListener(v -> {
             String input = etNumber.getText().toString().trim();
             if (input.isEmpty()) {
@@ -65,14 +67,12 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            // Generate the table
             tableItems.clear();
             for (int i = 1; i <= 10; i++) {
                 tableItems.add(number + " × " + i + " = " + (number * i));
             }
             adapter.notifyDataSetChanged();
 
-            // Add number to history (optional, if using DataRepository)
             DataRepository.addToHistory(number);
         });
 
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             String row = tableItems.get(position);
             new AlertDialog.Builder(this)
                     .setTitle("Delete row?")
-                    .setMessage(" want to delete:\n" + row)
+                    .setMessage("Do you want to delete:\n" + row) // (tiny fix to your string)
                     .setPositiveButton("Delete", (dialog, which) -> {
                         tableItems.remove(position);
                         adapter.notifyDataSetChanged();
@@ -92,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
                     .setNegativeButton("Cancel", null)
                     .show();
         });
+
+
+        if (btnHistory != null) {
+            btnHistory.setOnClickListener(v -> {
+                startActivity(new Intent(MainActivity.this, HistoryActivity.class));
+            });
+        }
     }
 
     @Override
@@ -100,13 +107,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //h andle menu option clicks
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_history) {
-            // Navigate to HistoryActivity
-            Intent intent = new Intent(this, HistoryActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, HistoryActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
