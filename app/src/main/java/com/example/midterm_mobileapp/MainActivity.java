@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText etNumber;
     private Button btnGenerate;
-    private Button btnHistory; // 👈 add this
+    private Button btnHistory;
     private ListView lvResults;
 
     private final ArrayList<String> tableItems = new ArrayList<>();
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         etNumber   = findViewById(R.id.etNumber);
         btnGenerate= findViewById(R.id.btnGenerate);
         lvResults  = findViewById(R.id.lvResults);
-        btnHistory = findViewById(R.id.btnHistory); // 👈 find it
+        btnHistory = findViewById(R.id.btnHistory);
 
         // Set up ListView
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, tableItems);
